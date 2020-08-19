@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso JavaScript</title>
+</head>
+
+<body>
+    <h3>
+        Exercício 3: A partir do seguinte vetor: var nomes = ["Diego", "Gabriel", "Lucas"];
+        Preencha uma lista no HTML com os itens do vetor.
+    </h3>
+    
+
+    <div id="app">
+        <ul>
+
+        </ul>
+
+    </div>
+
+    <script>
+
+        
+
+
+        var nomes = ["Diego", "Gabriel", "Lucas"];
+
+        for (nome of nomes){
+
+            var textElement = document.createTextNode(nome);
+            var newElement = document.createElement('li');
+            var ulElement = document.querySelector('ul');
+
+            ulElement.appendChild(newElement);
+            newElement.appendChild(textElement);
+
+       
+        
+        }
+        
+
+
+
+    </script>
+    
+</body>
+</html>

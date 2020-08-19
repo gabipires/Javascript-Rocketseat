@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h3>
+        Exercício 2: Crie uma tela com um "input" que deve receber o nome de um usuário no Github. Após digitar o nome do usuário e clicar no botão buscar a aplicação deve buscar pela API do Github (conforme URL abaixo) os dados de repositórios do usuário e mostrá-los em tela: URL de exemplo: "https://api.github.com/users/diego3g/repos" Basta alterar "diego3g" pelo nome do usuário.
+
+    </h3>
+
+    <input type="text" name="user">
+    <button onclick="concatenar()">Adicionar</button>
+
+    <ul>
+
+    </ul>
+
+    <script src='https://unpkg.com/axios/dist/axios.min.js'></script>
+
+    <script>
+
+        var listElement = document.querySelector('ul');
+        var inputElement = document.querySelector('input');
+
+        function renderizar(repositories){
+            for (repo of repositories){
+
+            var textElement = document.createTextNode(repo.name);
+            var liElement = document.createElement('li');
+
+            liElement.appendChild(textElement);
+            listElement.appendChild(liElement);
+            
+            }
+        }
+
+
+        function concatenar(){
+            var texto = inputElement.value;
+            var url = "https://api.github.com/users/"+texto+"/repos"
+
+            if(!texto) return;
+
+            axios.get(url)
+            .then(function(response){
+                renderizar(response.data);  
+            })
+            .catch(function(error){
+                console.warn(error);
+            });
+
+        }
+
+
+
+
+    </script>
+</body>
+</html>

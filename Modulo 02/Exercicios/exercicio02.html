@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso JavaScript</title>
+</head>
+
+<body>
+
+    <h3>
+        Exercício 2: Utilizando o resultado do primeiro desafio, toda vez que o usuário passar o mouse por cima de algum quadrado troque sua cor para uma cor aleatória
+    </h3>
+
+    <button class="botao">Criar quadrado</button>
+    <div id="app">
+
+    </div>
+
+    <script>
+        var butonElement = document.querySelector('.botao');
+        var divAtual = document.querySelector('#app');
+
+        function getRandomColor() {
+            var letters = "0123456789ABCDEF";
+            var color = "#";
+                for (var i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+            return color;
+        };
+
+
+        butonElement.onclick=function(){
+            var newElement = document.createElement('div');
+                     
+            newElement.style.width = '100px';
+            newElement.style.height = '100px';
+            newElement.style.backgroundColor = '#f00';
+        
+        
+
+            newElement.onmouseover = function (){
+                newElement.style.backgroundColor = getRandomColor();
+            };  
+
+            divAtual.appendChild(newElement);
+
+    };
+
+        
+
+    </script>
+    
+</body>
+</html>

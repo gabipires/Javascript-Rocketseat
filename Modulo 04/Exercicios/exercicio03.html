@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h3>
+        Exercício 3: A partir do resultado do exemplo anterior adicione um indicador de carregamento em tela no lugar da lista apenas enquanto a requisição estiver acontecendo. Além disso, adicione uma mensagem de erro em tela caso o usuário no Github não exista.Dica: Quando o usuário não existe, a requisição irá cair no .catch com código de erro 404.
+
+
+    </h3>
+
+    <input type="text" name="user">
+    <button onclick="concatenar()">Adicionar</button>
+
+    <ul>
+
+    </ul>
+
+    <script src='https://unpkg.com/axios/dist/axios.min.js'></script>
+
+    <script>
+
+        var listElement = document.querySelector('ul');
+        var inputElement = document.querySelector('input');
+
+        function renderizar(repositories){
+            listElement.innerHTML = '';
+            for (repo of repositories){
+
+            var textElement = document.createTextNode(repo.name);
+            var liElement = document.createElement('li');
+
+            liElement.appendChild(textElement);
+            listElement.appendChild(liElement);
+            
+            }
+        }
+
+        function renderLoading(loading) {
+            listElement.innerHTML = "";
+            var textElement = document.createTextNode('Carregando...');
+            var loadingElement = document.createElement('li');
+            loadingElement.appendChild(textElement);
+            listElement.appendChild(loadingElement);
+        }
+
+        function renderError(loading) {
+            listElement.innerHTML = "";
+            alert("Usuário não encontrado");
+        }
+
+
+
+        function concatenar(){
+            var texto = inputElement.value;
+            var url = "https://api.github.com/users/"+texto+"/repos"
+
+            if(!texto) return;
+            renderLoading();
+
+            axios.get(url)
+            .then(function(response){
+                renderizar(response.data);  
+            })
+            .catch(function(error){
+                renderError();
+            });
+
+        }
+
+
+
+
+    </script>
+</body>
+</html>
